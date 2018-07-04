@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * GiaPhuGroup Co., Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the GiaPhuGroup.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.giaphugroup.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    PHPCuong
+ * @package     PHPCuong_AddressAutocomplete
+ * @copyright   Copyright (c) 2018-2019 GiaPhuGroup Co., Ltd. All rights reserved. (http://www.giaphugroup.com/)
+ * @license     https://www.giaphugroup.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="phpcuong_address_autocomplete" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Customer Address Autocomplete</label>
+            <tab>phpcuong</tab>
+            <resource>PHPCuong_CustomerAddressAutocomplete::config_address_autocomplete</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="api_key" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Maps JavaScript API</label>
+                    <comment>Create API key, please &lt;a href="https://cloud.google.com/console" target="_blank"&gt;click here&lt;/a&gt;.</comment>
+                    <validate>required-entry</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
