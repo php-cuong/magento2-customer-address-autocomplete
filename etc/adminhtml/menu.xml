@@ -22,6 +22,7 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="PHPCuong_CustomerAddressAutocomplete::configuration" title="Configuration" module="PHPCuong_CustomerAddressAutocomplete" sortOrder="10" action="adminhtml/system_config/edit/section/phpcuong_address_autocomplete" resource="PHPCuong_CustomerAddressAutocomplete::config_address_autocomplete" parent="PHPCuong_Core::giaphugroup_menu"/>
+        <add id="PHPCuong_CustomerAddressAutocomplete::address_autocomplete" title="Address Autocomplete" translate="title" module="PHPCuong_CustomerAddressAutocomplete" sortOrder="10" resource="PHPCuong_CustomerAddressAutocomplete::config_address_autocomplete" parent="PHPCuong_Core::giaphugroup_menu"/>
+        <add id="PHPCuong_CustomerAddressAutocomplete::configuration" title="Configuration" module="PHPCuong_CustomerAddressAutocomplete" sortOrder="20" action="adminhtml/system_config/edit/section/phpcuong_address_autocomplete" resource="PHPCuong_CustomerAddressAutocomplete::config_address_autocomplete" parent="PHPCuong_CustomerAddressAutocomplete::address_autocomplete"/>
     </menu>
 </config>

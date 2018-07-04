@@ -37,7 +37,9 @@ define([
       },
       shippingAutocomplete: null,
       billingAutocomplete: null,
-      billingStreetFound: false
+      billingStreetFound: false,
+      billingFunction: null,
+      shippingFunctions: null
     },
 
     /**
@@ -102,6 +104,7 @@ define([
     _fillInBillingAddress() {
       // Get the place details from the autocomplete object.
       var place = this.options.billingAutocomplete.getPlace();
+      console.log(place);
       // Get each component of the address from the place details
       // and fill the corresponding field on the form.
       for (var i = place.address_components.length-1; i >= 0; i--) {
