@@ -22,8 +22,7 @@ var config = {
     map: {
         '*': {
             addressAutofill: 'PHPCuong_CustomerAddressAutocomplete/js/address-autofill',
-            shippingAutofill: 'PHPCuong_CustomerAddressAutocomplete/js/shipping-autofill',
-            billingAutofill: 'PHPCuong_CustomerAddressAutocomplete/js/billing-autofill'
+            checkoutAddressAutofill: 'PHPCuong_CustomerAddressAutocomplete/js/checkout-address-autofill'
         }
     }
 };
