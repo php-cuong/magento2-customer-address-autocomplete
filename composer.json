@@ -1,0 +1,41 @@
+{
+    "name": "php-cuong/magento2-customer-address-autocomplete",
+    "description":"Magento2 Customer Address Autocomplete Extension Free",
+    "keywords": [
+        "magento 2",
+        "magento 2 extension",
+        "extension free",
+        "address autofill",
+        "Customer Address Autocomplete",
+        "Address Autocomplete",
+        "Maps Javascript API",
+        "Google Maps"
+    ],
+    "require": {
+        "php": "~5.6.0|7.0.2|~7.0.6|~7.0.13|~7.1.0",
+        "magento/module-backend": "100.0.*|100.1.*|101.0.*|100.2.*",
+        "magento/framework": "100.0.*|100.1.*|101.0.*|100.2.*",
+        "php-cuong/magento2-module-core": "2.2.*"
+    },
+    "type": "magento2-module",
+    "version": "2.1.0",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "authors": [
+        {
+            "name": "Cuong NQ",
+            "email": "bestearnmoney87@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "PHPCuong\\CustomerAddressAutocomplete\\": ""
+        }
+    }
+}
