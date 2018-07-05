@@ -24,8 +24,7 @@
     <default>
         <phpcuong_address_autocomplete>
             <general>
-                <api_key>AIzaSyAo4tEzHqBYcQQtBYYKFoZXhy3j_SX-osU</api_key>
-                <enable>1</enable>
+                <enable>0</enable>
             </general>
         </phpcuong_address_autocomplete>
     </default>
