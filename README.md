@@ -22,3 +22,10 @@ In this module, I used the Maps Javascript API of the Google for autocompleting 
 - Go to the Add New Address page
 - Go to the Create New Customer Account page
 - Go the the checkout page.
+
+## The screenshot of this extension
+
+### - On the Storefront:
+
+#### *The interface used for the customer creates new customer account page*
+![ScreenShot](https://github.com/php-cuong/magento2-customer-address-autocomplete/blob/master/Screenshot/address-autocomplete.gif)
