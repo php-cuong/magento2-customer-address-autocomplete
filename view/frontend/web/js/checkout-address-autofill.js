@@ -38,8 +38,7 @@ define([
       shippingAutocomplete: null,
       billingAutocomplete: null,
       billingStreetFound: false,
-      billingFunction: null,
-      shippingFunctions: null
+      billingFunction: null
     },
 
     /**
@@ -48,97 +47,8 @@ define([
      */
     _create: function () {
       var self = this;
-      this._initShippingAutocomplete();
 
-      $(document).on('change', 'select[name="billing_address_id"]', function() {
-        if ($(this).find('option:last').prop('selected')) {
-          self._initBillingAutocomplete();
-        }
-      });
-
-      $(document).on('click', 'input[name="billing-address-same-as-shipping"], .action-edit-address', function() {
-        self._initBillingAutocomplete();
-      });
-    },
-
-    /**
-     * Fill in shipping address
-     *
-     * @private
-     */
-    _fillInShippingAddress() {
-      // Get the place details from the autocomplete object.
-      var place = this.options.shippingAutocomplete.getPlace();
-      // Get each component of the address from the place details
-      // and fill the corresponding field on the form.
-      for (var i = place.address_components.length-1; i >= 0; i--) {
-        var addressType = place.address_components[i].types[0];
-        var long_name = place.address_components[i].long_name;
-        var short_name = place.address_components[i].short_name;
-        if (this.options.componentForm[addressType] && long_name) {
-          if (this.options.componentForm[addressType] == 'country') {
-            $('#shipping-new-address-form select[name="country_id"]').val(short_name).trigger('change');
-          } else if (this.options.componentForm[addressType] == 'region') {
-            $('#shipping-new-address-form input[name="region"]').val(long_name).trigger('keyup');
-            if ($('#shipping-new-address-form select[name="region_id"] option:contains('+long_name+')')) {
-              $('#shipping-new-address-form select[name="region_id"] option:contains('+long_name+')').prop('selected', true).trigger('change');
-            }
-          } else if (this.options.componentForm[addressType] == 'route') {
-            $('#shipping-new-address-form input[name="street[0]"]').val(long_name).trigger('keyup').trigger('keyup');
-          } else if (this.options.componentForm[addressType] == 'street_1') {
-            $('#shipping-new-address-form input[name="street[0]"]').val(long_name + ' '+ $('#shipping-new-address-form input[name="street[0]"]').val()).trigger('keyup');
-          } else if (this.options.componentForm[addressType] == 'zip') {
-            $('#shipping-new-address-form input[name="postcode"]').val(long_name).trigger('keyup');
-          } else {
-            $('#shipping-new-address-form input[name="'+this.options.componentForm[addressType]+'"]').val(long_name).trigger('keyup');
-          }
-        }
-      }
-    },
-
-    /**
-     * Fill in billing address
-     *
-     * @private
-     */
-    _fillInBillingAddress() {
-      // Get the place details from the autocomplete object.
-      var place = this.options.billingAutocomplete.getPlace();
-      console.log(place);
-      // Get each component of the address from the place details
-      // and fill the corresponding field on the form.
-      for (var i = place.address_components.length-1; i >= 0; i--) {
-        var addressType = place.address_components[i].types[0];
-        var long_name = place.address_components[i].long_name;
-        var short_name = place.address_components[i].short_name;
-        if (this.options.componentForm[addressType] && long_name) {
-          if (this.options.componentForm[addressType] == 'country') {
-            $('#billing-new-address-form select[name="country_id"]').val(short_name).trigger('change');
-          } else if (this.options.componentForm[addressType] == 'region') {
-            $('#billing-new-address-form input[name="region"]').val(long_name).trigger('keyup');
-            if ($('#billing-new-address-form select[name="region_id"] option:contains('+long_name+')')) {
-              $('#billing-new-address-form select[name="region_id"] option:contains('+long_name+')').prop('selected', true).trigger('change');
-            }
-          } else if (this.options.componentForm[addressType] == 'route') {
-            $('#billing-new-address-form input[name="street[0]"]').val(long_name).trigger('keyup').trigger('keyup');
-          } else if (this.options.componentForm[addressType] == 'street_1') {
-            $('#billing-new-address-form input[name="street[0]"]').val(long_name + ' '+ $('#billing-new-address-form input[name="street[0]"]').val()).trigger('keyup');
-          } else if (this.options.componentForm[addressType] == 'zip') {
-            $('#billing-new-address-form input[name="postcode"]').val(long_name).trigger('keyup');
-          } else {
-            $('#billing-new-address-form input[name="'+this.options.componentForm[addressType]+'"]').val(long_name).trigger('keyup');
-          }
-        }
-      }
-    },
-
-    /**
-     * Get place for shipping address
-     *
-     * @private
-     */
-    _initShippingAutocomplete() {
-      var self = this;
+      // Fill in shipping address
       this.options.shippingFunctions = setInterval(function() {
         var street = $('#shipping-new-address-form').find('input[name="street[0]"]')[0];
         if (street) {
@@ -149,7 +59,33 @@ define([
           self.options.shippingAutocomplete.inputId = street.id;
           self.options.shippingAutocomplete.setComponentRestrictions({'country': self._getCountriesCodeArray()});
           google.maps.event.addListener(self.options.shippingAutocomplete, 'place_changed', function () {
-            self._fillInShippingAddress();
+            // Get the place details from the autocomplete object.
+            var place = self.options.shippingAutocomplete.getPlace();
+            // Get each component of the address from the place details
+            // and fill the corresponding field on the form.
+            for (var i = place.address_components.length-1; i >= 0; i--) {
+              var addressType = place.address_components[i].types[0];
+              var long_name = place.address_components[i].long_name;
+              var short_name = place.address_components[i].short_name;
+              if (self.options.componentForm[addressType] && long_name) {
+                if (self.options.componentForm[addressType] == 'country') {
+                  $('#shipping-new-address-form select[name="country_id"]').val(short_name).trigger('change');
+                } else if (self.options.componentForm[addressType] == 'region') {
+                  $('#shipping-new-address-form input[name="region"]').val(long_name).trigger('keyup');
+                  if ($('#shipping-new-address-form select[name="region_id"] option:contains('+long_name+')')) {
+                    $('#shipping-new-address-form select[name="region_id"] option:contains('+long_name+')').prop('selected', true).trigger('change');
+                  }
+                } else if (self.options.componentForm[addressType] == 'route') {
+                  $('#shipping-new-address-form input[name="street[0]"]').val(long_name).trigger('keyup').trigger('keyup');
+                } else if (self.options.componentForm[addressType] == 'street_1') {
+                  $('#shipping-new-address-form input[name="street[0]"]').val(long_name + ' '+ $('#shipping-new-address-form input[name="street[0]"]').val()).trigger('keyup');
+                } else if (self.options.componentForm[addressType] == 'zip') {
+                  $('#shipping-new-address-form input[name="postcode"]').val(long_name).trigger('keyup');
+                } else {
+                  $('#shipping-new-address-form input[name="'+self.options.componentForm[addressType]+'"]').val(long_name).trigger('keyup');
+                }
+              }
+            }
           });
           clearInterval(self.options.shippingFunctions);
         }
@@ -158,14 +94,26 @@ define([
           clearInterval(self.options.shippingFunctions);
         }
       }, 2000);
+
+      $(document).on('change', 'select[name="billing_address_id"]', function() {
+        if ($(this).find('option:last').prop('selected')) {
+          self._fillInBillingAddress();
+        }
+      });
+
+      $(document).on('click', 'input[name="billing-address-same-as-shipping"], .action-edit-address', function() {
+        if ($(this).find('option:last').prop('selected')) {
+          self._fillInBillingAddress();
+        }
+      });
     },
 
     /**
-     * Get place for billing address
+     * Fill in billing address
      *
      * @private
      */
-    _initBillingAutocomplete() {
+    _fillInBillingAddress() {
       var self = this;
       if (!this.options.billingStreetFound) {
         this.options.billingFunctions = setInterval(function() {
@@ -178,7 +126,33 @@ define([
             self.options.billingAutocomplete.inputId = street.id;
             self.options.billingAutocomplete.setComponentRestrictions({'country': self._getCountriesCodeArray()});
             google.maps.event.addListener(self.options.billingAutocomplete, 'place_changed', function () {
-              self._fillInBillingAddress();
+              // Get the place details from the autocomplete object.
+              var place = self.options.billingAutocomplete.getPlace();
+              // Get each component of the address from the place details
+              // and fill the corresponding field on the form.
+              for (var i = place.address_components.length-1; i >= 0; i--) {
+                var addressType = place.address_components[i].types[0];
+                var long_name = place.address_components[i].long_name;
+                var short_name = place.address_components[i].short_name;
+                if (self.options.componentForm[addressType] && long_name) {
+                  if (self.options.componentForm[addressType] == 'country') {
+                    $('#billing-new-address-form select[name="country_id"]').val(short_name).trigger('change');
+                  } else if (self.options.componentForm[addressType] == 'region') {
+                    $('#billing-new-address-form input[name="region"]').val(long_name).trigger('keyup');
+                    if ($('#billing-new-address-form select[name="region_id"] option:contains('+long_name+')')) {
+                      $('#billing-new-address-form select[name="region_id"] option:contains('+long_name+')').prop('selected', true).trigger('change');
+                    }
+                  } else if (self.options.componentForm[addressType] == 'route') {
+                    $('#billing-new-address-form input[name="street[0]"]').val(long_name).trigger('keyup').trigger('keyup');
+                  } else if (self.options.componentForm[addressType] == 'street_1') {
+                    $('#billing-new-address-form input[name="street[0]"]').val(long_name + ' '+ $('#billing-new-address-form input[name="street[0]"]').val()).trigger('keyup');
+                  } else if (self.options.componentForm[addressType] == 'zip') {
+                    $('#billing-new-address-form input[name="postcode"]').val(long_name).trigger('keyup');
+                  } else {
+                    $('#billing-new-address-form input[name="'+self.options.componentForm[addressType]+'"]').val(long_name).trigger('keyup');
+                  }
+                }
+              }
             });
             clearInterval(self.options.billingFunctions);
             self.options.billingStreetFound = true;

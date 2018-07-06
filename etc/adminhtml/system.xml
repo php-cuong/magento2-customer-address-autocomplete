@@ -34,7 +34,7 @@
                 </field>
                 <field id="api_key" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Maps JavaScript API</label>
-                    <comment>Create API key, please &lt;a href="https://cloud.google.com/console" target="_blank"&gt;click here&lt;/a&gt;.</comment>
+                    <comment>Create API key, please &lt;a href="https://developers.google.com/places/web-service/get-api-key" target="_blank"&gt;click here&lt;/a&gt;.</comment>
                     <validate>required-entry</validate>
                 </field>
             </group>
