@@ -105,11 +105,11 @@ class Autocomplete extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * Retrieve the locate
+     * Retrieve the locale
      *
      * @return string
      */
-    public function getLocate()
+    public function getLocale()
     {
         return $this->_localeResolver->getLocale();
     }
